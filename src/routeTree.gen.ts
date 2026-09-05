@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as AdminAnalyticsRouteImport } from './routes/admin.analytics'
 import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
+import { Route as AdminQueueRouteImport } from './routes/admin.queue'
 import { Route as AdminUsersRouteImport } from './routes/admin.users'
 import { Route as OperatorDashboardRouteImport } from './routes/operator.dashboard'
 import { Route as OperatorProcessingRouteImport } from './routes/operator.processing'
@@ -20,6 +21,7 @@ import { Route as OperatorResultRouteImport } from './routes/operator.result'
 import { Route as OperatorUploadRouteImport } from './routes/operator.upload'
 import { Route as OperatorUploadsRouteImport } from './routes/operator.uploads'
 import { Route as VerifierDashboardRouteImport } from './routes/verifier.dashboard'
+import { Route as VerifierQueueRouteImport } from './routes/verifier.queue'
 import { Route as VerifierReviewRouteImport } from './routes/verifier.review'
 
 const IndexRoute = IndexRouteImport.update({
@@ -40,6 +42,11 @@ const AdminAnalyticsRoute = AdminAnalyticsRouteImport.update({
 const AdminDashboardRoute = AdminDashboardRouteImport.update({
   id: '/admin/dashboard',
   path: '/admin/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminQueueRoute = AdminQueueRouteImport.update({
+  id: '/admin/queue',
+  path: '/admin/queue',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminUsersRoute = AdminUsersRouteImport.update({
@@ -77,6 +84,11 @@ const VerifierDashboardRoute = VerifierDashboardRouteImport.update({
   path: '/verifier/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VerifierQueueRoute = VerifierQueueRouteImport.update({
+  id: '/verifier/queue',
+  path: '/verifier/queue',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const VerifierReviewRoute = VerifierReviewRouteImport.update({
   id: '/verifier/review',
   path: '/verifier/review',
@@ -88,6 +100,7 @@ export interface FileRoutesByFullPath {
   '/search': typeof SearchRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/queue': typeof AdminQueueRoute
   '/admin/users': typeof AdminUsersRoute
   '/operator/dashboard': typeof OperatorDashboardRoute
   '/operator/processing': typeof OperatorProcessingRoute
@@ -95,6 +108,7 @@ export interface FileRoutesByFullPath {
   '/operator/upload': typeof OperatorUploadRoute
   '/operator/uploads': typeof OperatorUploadsRoute
   '/verifier/dashboard': typeof VerifierDashboardRoute
+  '/verifier/queue': typeof VerifierQueueRoute
   '/verifier/review': typeof VerifierReviewRoute
 }
 export interface FileRoutesByTo {
@@ -102,6 +116,7 @@ export interface FileRoutesByTo {
   '/search': typeof SearchRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/queue': typeof AdminQueueRoute
   '/admin/users': typeof AdminUsersRoute
   '/operator/dashboard': typeof OperatorDashboardRoute
   '/operator/processing': typeof OperatorProcessingRoute
@@ -109,6 +124,7 @@ export interface FileRoutesByTo {
   '/operator/upload': typeof OperatorUploadRoute
   '/operator/uploads': typeof OperatorUploadsRoute
   '/verifier/dashboard': typeof VerifierDashboardRoute
+  '/verifier/queue': typeof VerifierQueueRoute
   '/verifier/review': typeof VerifierReviewRoute
 }
 export interface FileRoutesById {
@@ -117,6 +133,7 @@ export interface FileRoutesById {
   '/search': typeof SearchRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/queue': typeof AdminQueueRoute
   '/admin/users': typeof AdminUsersRoute
   '/operator/dashboard': typeof OperatorDashboardRoute
   '/operator/processing': typeof OperatorProcessingRoute
@@ -124,6 +141,7 @@ export interface FileRoutesById {
   '/operator/upload': typeof OperatorUploadRoute
   '/operator/uploads': typeof OperatorUploadsRoute
   '/verifier/dashboard': typeof VerifierDashboardRoute
+  '/verifier/queue': typeof VerifierQueueRoute
   '/verifier/review': typeof VerifierReviewRoute
 }
 export interface FileRouteTypes {
@@ -133,6 +151,7 @@ export interface FileRouteTypes {
     | '/search'
     | '/admin/analytics'
     | '/admin/dashboard'
+    | '/admin/queue'
     | '/admin/users'
     | '/operator/dashboard'
     | '/operator/processing'
@@ -140,6 +159,7 @@ export interface FileRouteTypes {
     | '/operator/upload'
     | '/operator/uploads'
     | '/verifier/dashboard'
+    | '/verifier/queue'
     | '/verifier/review'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -147,6 +167,7 @@ export interface FileRouteTypes {
     | '/search'
     | '/admin/analytics'
     | '/admin/dashboard'
+    | '/admin/queue'
     | '/admin/users'
     | '/operator/dashboard'
     | '/operator/processing'
@@ -154,6 +175,7 @@ export interface FileRouteTypes {
     | '/operator/upload'
     | '/operator/uploads'
     | '/verifier/dashboard'
+    | '/verifier/queue'
     | '/verifier/review'
   id:
     | '__root__'
@@ -161,6 +183,7 @@ export interface FileRouteTypes {
     | '/search'
     | '/admin/analytics'
     | '/admin/dashboard'
+    | '/admin/queue'
     | '/admin/users'
     | '/operator/dashboard'
     | '/operator/processing'
@@ -168,6 +191,7 @@ export interface FileRouteTypes {
     | '/operator/upload'
     | '/operator/uploads'
     | '/verifier/dashboard'
+    | '/verifier/queue'
     | '/verifier/review'
   fileRoutesById: FileRoutesById
 }
@@ -176,6 +200,7 @@ export interface RootRouteChildren {
   SearchRoute: typeof SearchRoute
   AdminAnalyticsRoute: typeof AdminAnalyticsRoute
   AdminDashboardRoute: typeof AdminDashboardRoute
+  AdminQueueRoute: typeof AdminQueueRoute
   AdminUsersRoute: typeof AdminUsersRoute
   OperatorDashboardRoute: typeof OperatorDashboardRoute
   OperatorProcessingRoute: typeof OperatorProcessingRoute
@@ -183,6 +208,7 @@ export interface RootRouteChildren {
   OperatorUploadRoute: typeof OperatorUploadRoute
   OperatorUploadsRoute: typeof OperatorUploadsRoute
   VerifierDashboardRoute: typeof VerifierDashboardRoute
+  VerifierQueueRoute: typeof VerifierQueueRoute
   VerifierReviewRoute: typeof VerifierReviewRoute
 }
 
@@ -214,6 +240,13 @@ declare module '@tanstack/react-router' {
       path: '/admin/dashboard'
       fullPath: '/admin/dashboard'
       preLoaderRoute: typeof AdminDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/queue': {
+      id: '/admin/queue'
+      path: '/admin/queue'
+      fullPath: '/admin/queue'
+      preLoaderRoute: typeof AdminQueueRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/users': {
@@ -265,6 +298,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VerifierDashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/verifier/queue': {
+      id: '/verifier/queue'
+      path: '/verifier/queue'
+      fullPath: '/verifier/queue'
+      preLoaderRoute: typeof VerifierQueueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/verifier/review': {
       id: '/verifier/review'
       path: '/verifier/review'
@@ -280,6 +320,7 @@ const rootRouteChildren: RootRouteChildren = {
   SearchRoute: SearchRoute,
   AdminAnalyticsRoute: AdminAnalyticsRoute,
   AdminDashboardRoute: AdminDashboardRoute,
+  AdminQueueRoute: AdminQueueRoute,
   AdminUsersRoute: AdminUsersRoute,
   OperatorDashboardRoute: OperatorDashboardRoute,
   OperatorProcessingRoute: OperatorProcessingRoute,
@@ -287,6 +328,7 @@ const rootRouteChildren: RootRouteChildren = {
   OperatorUploadRoute: OperatorUploadRoute,
   OperatorUploadsRoute: OperatorUploadsRoute,
   VerifierDashboardRoute: VerifierDashboardRoute,
+  VerifierQueueRoute: VerifierQueueRoute,
   VerifierReviewRoute: VerifierReviewRoute,
 }
 export const routeTree = rootRouteImport
